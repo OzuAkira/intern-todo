@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { actions, formCard, input, primaryBtn, textarea } from './RegisterForm.styles';
+import type { TaskType } from '../../types';
+import { TaskList } from '../TaskList/TaskList';
 
-export const RegisterForm = () => {
+
+type Props = {
+  setTaskList: React.Dispatch<React.SetStateAction<TaskType[]>>;
+}
+export const RegisterForm = (props: Props) => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
 
@@ -11,13 +17,25 @@ export const RegisterForm = () => {
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
     // ここに追加ボタン押下時の処理を書く
+      props.setTaskList((prev) => {
+        return [
+          ...prev,
+          {
+            id: Math.random(),
+            title: title,
+            detail : detail
+          }
+        ]});
+
+
+
   };
 
   return (
     <form style={formCard} onSubmit={(e) => onSubmitForm(e)}>
-      <input style={input} type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input style={input} type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='タイトル' required/>
       <br />
-      <textarea style={textarea} value={detail} onChange={(e) => setDetail(e.target.value)} rows={7}></textarea>
+      <textarea style={textarea} value={detail} onChange={(e) => setDetail(e.target.value)} rows={7} placeholder='todoを入力' required></textarea>
       <div style={actions}>
         <button style={primaryBtn(true)} type='submit'>
           追加
