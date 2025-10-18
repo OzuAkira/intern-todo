@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { actions, formCard, input, primaryBtn, textarea } from './RegisterForm.styles';
+import type { TaskType } from '../../types';
+import { TaskList } from '../TaskList/TaskList';
 
-export const RegisterForm = () => {
+
+type Props = {
+  setTaskList: React.Dispatch<React.SetStateAction<TaskType[]>>;
+}
+export const RegisterForm = (props: Props) => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
 
@@ -11,6 +17,18 @@ export const RegisterForm = () => {
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
     // ここに追加ボタン押下時の処理を書く
+      props.setTaskList((prev) => {
+        return [
+          ...prev,
+          {
+            id: Math.random(),
+            title: title,
+            detail : detail
+          }
+        ]});
+
+
+
   };
 
   return (
