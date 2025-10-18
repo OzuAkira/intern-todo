@@ -33,9 +33,9 @@ export const RegisterForm = (props: Props) => {
 
   return (
     <form style={formCard} onSubmit={(e) => onSubmitForm(e)}>
-      <input style={input} type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input style={input} type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='タイトル' required/>
       <br />
-      <textarea style={textarea} value={detail} onChange={(e) => setDetail(e.target.value)} rows={7}></textarea>
+      <textarea style={textarea} value={detail} onChange={(e) => setDetail(e.target.value)} rows={7} placeholder='todoを入力' required></textarea>
       <div style={actions}>
         <button style={primaryBtn(true)} type='submit'>
           追加
