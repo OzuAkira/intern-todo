@@ -31,6 +31,8 @@ export const TaskCard = ({ task,taskList,setTaskList }: Props) => {
    */
   const onClickDeleteButton = () => {
     // ここに削除ボタン押下時の処理
+    const newTaskList = taskList.filter((task) => task.id != id)
+    setTaskList(newTaskList)
   };
 
   // TODO：編集の作成
